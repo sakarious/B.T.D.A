@@ -1,0 +1,13 @@
+
+- Initialize a project => done
+- Create an express app. => done
+- Create route => done
+- Create Middlewares => Done
+- Create CRUD => Done
+- Create Controllers,
+- Create Services
+- Port DB to SQL (MySQL)
+- Port DB to NoSQL (Mongodb)
+- Create Views for todos
+- Write Unit test
+
