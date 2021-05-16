@@ -1,11 +1,11 @@
 const {v4: uuidv4} = require('uuid')
 //for todo, extract todos schema from models
-const { todo } = require('../models')
+const { todo, done } = require('../models')
 
 module.exports = class todoServices{
-    static async createTodo(description){
+    static createTodo(description){
         try{
-            let newTodo = await todo.create({
+            let newTodo = todo.create({
                 "uniqueId" : uuidv4(),
                 "description" : description,
                 "isCompleted" : false
@@ -20,12 +20,11 @@ module.exports = class todoServices{
 
     static async getAllTodos(){
         try{
-            let docs = await todo.findAll({
+            return await todo.findAll({
                 order: [
                     ['createdAt', 'DESC'],
                 ],
             })
-            return docs
 
         } catch(err) {
             console.log(err.message);
@@ -71,6 +70,56 @@ module.exports = class todoServices{
                 return response
             
         } catch(err) {
+            console.log(err.message);
+        }
+    }
+
+
+
+    //========== FOR COMPLETED TODOS FEATURE ==================================================
+
+    static completeTodo(id, description, status, reward){
+        try{
+            let completedTodo = done.create({
+                "uniqueId" : id,
+                "description" : description,
+                "reward" : reward,
+                "isCompleted" : status,
+            })
+            return completedTodo
+        }
+        catch(err){
+            console.log(err.message);
+        }
+
+    }
+
+    static async getAllCompletedTodos(){
+        try{
+            return await done.findAll({
+                order: [
+                    ['createdAt', 'DESC'],
+                ],
+            })
+
+        } catch(err) {
+            console.log(err.message);
+        }
+    }
+
+    static async getCompletedTodoById (id) {
+        try{
+            let todoId = id
+
+            let response = await done.findAll({
+                where: {
+                    uniqueId : todoId
+                }
+            })
+
+            return response
+        }
+        catch(err) {
             console.log(err.message);
         }
     }

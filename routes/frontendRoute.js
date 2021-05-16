@@ -11,12 +11,12 @@ router.get('/create', (req, res) => {
     frontendController.createTodo(req, res)
 })
 
-router.get('/all', (req, res) => {
-    frontendController.getAll(req, res)
-})
-
 router.post('/process', (req, res) => {
     frontendController.processTodo(req, res)
+})
+
+router.get('/all', (req, res) => {
+    frontendController.getAll(req, res)
 })
 
 router.get('/view/:uniqueId', (req, res) => {
@@ -39,4 +39,15 @@ router.post('/delete/:uniqueId', (req, res) => {
     frontendController.processDelete(req, res)
 })
 
+router.get('/done/:uniqueId', (req, res) => {
+    frontendController.complete(req, res)
+})
+
+router.post('/done/:uniqueId', (req, res) => {
+    frontendController.processComplete(req, res)
+})
+
+router.get('/completedtodos', (req, res) => {
+    frontendController.getAllCompleted(req, res)
+})
 module.exports = router

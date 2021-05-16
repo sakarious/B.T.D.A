@@ -1,4 +1,5 @@
 //import services
+const { diskStorage } = require('multer')
 const todoServices = require('../services/todoServices')
 
 module.exports = class frontendController {
@@ -12,19 +13,17 @@ module.exports = class frontendController {
     }
 
     static async processTodo (req, res) {
-
-            let response = await todoServices.createTodo(req.body.description)
+            let description = req.body.description
+            let response = await todoServices.createTodo(description)
             if(response){
-                let  newUID = response.dataValues.uniqueId
-                res.redirect(`/view/${newUID}`)
+                res.redirect('/all')
             }
-
     }
 
     static async getAll(req, res){
         let allTodos = await todoServices.getAllTodos()
         if(allTodos){
-            res.render('getAllTodos', {title: 'See all Todos', todos: allTodos})
+            res.render('getAllTodos', {title: 'See all Todos', todos :allTodos})
         }
     }
 
@@ -63,5 +62,35 @@ module.exports = class frontendController {
         let response = await todoServices.deleteTodo(id)
         res.redirect('/all')
     }
+
+    static async complete(req, res){
+        let id = req.params.uniqueId
+        let todo = await todoServices.getById(id)
+        res.render('done', {title: 'Complete Todo', Onetodo: todo})
+    }
+
+    static async processComplete(req, res) {
+        let id = req.body.uniqueID
+        let description = req.body.description
+        let reward = (req.body.reward == '') ? 'More Work' : req.body.reward
+        
+        if (req.body.status == '') {
+            let status = true 
+            let response = await todoServices.completeTodo(id, description, status, reward)
+            if (response){
+                let response = await todoServices.deleteTodo(id)
+                if (response) {
+                    res.redirect('/completedtodos')
+                }
+                
+            }
+        } else{
+            res.redirect('/all')
+        }
+        
+        
+    }
+
+    static async getAllCompleted(req, res){}
 
 }
