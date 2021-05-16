@@ -91,6 +91,17 @@ module.exports = class frontendController {
         
     }
 
-    static async getAllCompleted(req, res){}
+    static async getAllCompleted(req, res){
+        let allTodos = await todoServices.getAllCompletedTodos()
+        if(allTodos){
+            res.render('completed', {title: 'All completed Todos', todos :allTodos})
+        }
+    }
+
+    static async getOneCompleted(req, res){
+        let id = req.params.uniqueId
+        let todo = await todoServices.getCompletedTodoById(id)
+        res.render('getOneCompletedTodo', {title: 'Todo', Onetodo: todo})
+    }
 
 }

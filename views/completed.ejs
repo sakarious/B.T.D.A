@@ -1,0 +1,39 @@
+<%- include('partials/header.ejs') %>
+    <main id="main">
+        <section id="features" class="features" >
+            <div class="container">
+      
+              <div class="section-title" style="margin-top: 20px !important;">
+                <h2>All Completed To-dos</h2>
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Description</th>
+                      <th scope="col">Reward</th>
+                      <th scope="col">Completed At</th>
+                      <th scope="col"></th>
+                      <th scope="col"></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% for (let index = 0; index < todos.length; index++) { %>
+                    <tr>
+                      <th scope="row"><%= (index) + 1 %></th>
+                      <td><%= todos[index].description  %></td>
+                      <td><%= todos[index].reward  %></td>
+                      <td><%= new Date(todos[index].createdAt).toDateString()  %></td>
+                      <td><a href="/viewcompleted/<%= todos[index].uniqueId %>" class="btn btn-primary">View</a></td>
+
+                    </tr>
+                    <% } %> 
+                  </tbody>
+                </table>
+                
+              </div>
+      
+            </div>
+          </section>
+        
+    </main>
+    <%- include('partials/footer.ejs') %>

@@ -50,4 +50,8 @@ router.post('/done/:uniqueId', (req, res) => {
 router.get('/completedtodos', (req, res) => {
     frontendController.getAllCompleted(req, res)
 })
+
+router.get('/viewcompleted/:uniqueId', (req, res) => {
+    frontendController.getOneCompleted(req, res)
+})
 module.exports = router
