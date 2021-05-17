@@ -3,6 +3,7 @@ const {v4: uuidv4} = require('uuid')
 const { todo, done } = require('../models')
 
 module.exports = class todoServices{
+    // Create new Todo
     static createTodo(description){
         try{
             let newTodo = todo.create({
@@ -19,6 +20,7 @@ module.exports = class todoServices{
 
     }
 
+    // Get all todos
     static async getAllTodos(){
         try{
             return await todo.findAll({
@@ -124,5 +126,38 @@ module.exports = class todoServices{
             console.log(err.message);
         }
     }
+
+    //========== FOR MONGODB ==================================================
+
+    // Create new Todo
+
+    static createTodo(description){
+        try{
+            let newTodo = new todoModel({
+                "uniqueId" : uuidv4(),
+                "description" : description,
+                "isCompleted" : false,
+                "reward": ''
+            })
+            let response = newTodo.save()
+            return response
+        }
+        catch(err){
+            console.log(err.message);
+        }
+    }
+
+        // Get all todos
+
+    static async getAllTodos(){
+        try{
+            let docs = await todoModel.find()
+            return docs
+        } catch(err) {
+            console.log(err.message);
+        }
+    }
+
+
     
 }
