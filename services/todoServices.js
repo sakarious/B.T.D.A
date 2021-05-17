@@ -103,7 +103,7 @@ module.exports = class todoServices{
             return await todo.findAll({
                 where: { isCompleted: true },
                 order: [
-                    ['createdAt', 'DESC'],
+                    ['updatedAt', 'DESC'],
                 ],
             })
 
@@ -130,117 +130,116 @@ module.exports = class todoServices{
         }
     }
 
-    //========== FOR MONGODB ==================================================
+    // //========== FOR MONGODB ==================================================
 
-    // Create new Todo
+    // // Create new Todo
 
-    static createTodo(description){
-        try{
-            let newTodo = new todoModel({
-                "uniqueId" : uuidv4(),
-                "description" : description,
-                "isCompleted" : false,
-                "reward": ''
-            })
-            let response = newTodo.save()
-            return response
-        }
-        catch(err){
-            console.log(err.message);
-        }
-    }
+    // static createTodo(description){
+    //     try{
+    //         let newTodo = new todoModel({
+    //             "uniqueId" : uuidv4(),
+    //             "description" : description,
+    //             "isCompleted" : false,
+    //             "reward": ''
+    //         })
+    //         let response = newTodo.save()
+    //         return response
+    //     }
+    //     catch(err){
+    //         console.log(err.message);
+    //     }
+    // }
 
-    // Get all todos
+    // // Get all todos
 
-    static async getAllTodos(){
-        try{
-            let docs = await todoModel.find({$and:[{"isCompleted": false}]})
-            return docs
-        } catch(err) {
-            console.log(err.message);
-        }
-    }
+    // static async getAllTodos(){
+    //     try{
+    //         let docs = await todoModel.find({$and:[{"isCompleted": false}]})
+    //         return docs
+    //     } catch(err) {
+    //         console.log(err.message);
+    //     }
+    // }
 
-    // Get a todo
+    // // Get a todo
 
-    static async getById (id) {
-        try{
-            let todoId = id
+    // static async getById (id) {
+    //     try{
+    //         let todoId = id
 
-            let response = await todoModel.findOne({uniqueId: todoId})
+    //         let response = await todoModel.findOne({uniqueId: todoId})
 
-            return response
-        }
-        catch(err) {
-            console.log(err.message);
-        }
-    }
+    //         return response
+    //     }
+    //     catch(err) {
+    //         console.log(err.message);
+    //     }
+    // }
 
-    // Delete a todo
+    // // Delete a todo
 
-    static async deleteTodo (id) {
-        try{
-            let todoId = id
-            let response = await todoModel.findOneAndDelete({uniqueId: todoId})
-            return response
-        }
-        catch(err) {
-            console.log(err.message);
-        }
-    }
+    // static async deleteTodo (id) {
+    //     try{
+    //         let todoId = id
+    //         let response = await todoModel.findOneAndDelete({uniqueId: todoId})
+    //         return response
+    //     }
+    //     catch(err) {
+    //         console.log(err.message);
+    //     }
+    // }
 
-    // Update a todo
+    // // Update a todo
     
-    static async updateTodo(id, fieldToUpdate){
-        try{
-            console.log(id);
-            console.log(fieldToUpdate);
-                let response = await todoModel.update({'uniqueId': id},{$set:{'description':fieldToUpdate }})
-                return response
+    // static async updateTodo(id, fieldToUpdate){
+    //     try{
+    //         console.log(id);
+    //         console.log(fieldToUpdate);
+    //             let response = await todoModel.update({'uniqueId': id},{$set:{'description':fieldToUpdate }})
+    //             return response
             
-        } catch(err) {
-            console.log(err.message);
-        }
-    }
+    //     } catch(err) {
+    //         console.log(err.message);
+    //     }
+    // }
 
-    //========== FOR COMPLETED TODOS FEATURE ==================================================
+    // //========== FOR COMPLETED TODOS FEATURE ==================================================
 
-    // complete todo
+    // // complete todo
 
-    static async completeTodo(id,status, reward){
-        try{
-            console.log(id);
-                let response = await todoModel.update({'uniqueId': id},{$set:{'isCompleted': status, 'reward': reward }})
-                return response
+    // static async completeTodo(id,status, reward){
+    //     try{
+    //         console.log(id);
+    //             let response = await todoModel.update({'uniqueId': id},{$set:{'isCompleted': status, 'reward': reward }})
+    //             return response
             
-        } catch(err) {
-            console.log(err.message);
-        }
+    //     } catch(err) {
+    //         console.log(err.message);
+    //     }
 
-    }
+    // }
 
-    static async getAllCompletedTodos(){
-        try{
-            let docs = await todoModel.find({$and:[{"isCompleted": true}]})
-            return docs
-        } catch(err) {
-            console.log(err.message);
-        }
-    }
+    // static async getAllCompletedTodos(){
+    //     try{
+    //         let docs = await todoModel.find({$and:[{"isCompleted": true}]})
+    //         return docs
+    //     } catch(err) {
+    //         console.log(err.message);
+    //     }
+    // }
 
-    static async getCompletedTodoById (id) {
-        try{
-            let todoId = id
+    // static async getCompletedTodoById (id) {
+    //     try{
+    //         let todoId = id
 
-            let response = await todoModel.findOne({uniqueId: todoId}, {$and:[{"isCompleted": true}]})
+    //         let response = await todoModel.findOne({uniqueId: todoId}, {$and:[{"isCompleted": true}]})
 
-            return response
-        }
-        catch(err) {
-            console.log(err.message);
-        }
-    }
+    //         return response
+    //     }
+    //     catch(err) {
+    //         console.log(err.message);
+    //     }
+    // }
 
-    //find({$and:[{"by":"tutorials point"},{"title": "MongoDB Overview"}]}).
 
 }

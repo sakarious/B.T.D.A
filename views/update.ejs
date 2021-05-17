@@ -9,7 +9,7 @@
                 <form action="/updateTodo/<%= todo.uniqueId %> " method="post">
                   <div class="mb-3">
                     <label for="exampleFormControlTextarea1" class="form-label"> <h4>To-do Description</h4></label>
-                    <textarea class="form-control" id="exampleFormControlTextarea1" name="description" rows="3"> <%= todo.description %> </textarea>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" name="description" rows="1"> <%= todo.description %> </textarea>
                   </div>
                  <% } %> 
                   <button type="submit" class="btn btn-primary">Edit To-do</button>

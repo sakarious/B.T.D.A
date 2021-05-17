@@ -78,8 +78,7 @@ module.exports = class frontendController {
             let status = true 
             let response = await todoServices.completeTodo(id, status, reward)
             if (response){
-                    //res.redirect('/completedtodos')
-                    res.send('done')
+                res.redirect('/completedtodos')
             }
         } else{
             res.redirect('/all')
