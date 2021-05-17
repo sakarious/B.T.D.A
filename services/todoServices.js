@@ -8,7 +8,8 @@ module.exports = class todoServices{
             let newTodo = todo.create({
                 "uniqueId" : uuidv4(),
                 "description" : description,
-                "isCompleted" : false
+                "isCompleted" : false,
+                "reward": ''
             })
             return newTodo
         }
@@ -78,17 +79,14 @@ module.exports = class todoServices{
 
     //========== FOR COMPLETED TODOS FEATURE ==================================================
 
-    static completeTodo(id, description, status, reward){
+    static async completeTodo(id){
         try{
-            let completedTodo = done.create({
-                "uniqueId" : id,
-                "description" : description,
-                "reward" : reward,
-                "isCompleted" : status,
-            })
-            return completedTodo
-        }
-        catch(err){
+            console.log(id);
+                let response = await todo.update({isCompleted: true},{returning: true, where: {uniqueId: id} })
+
+                return response
+            
+        } catch(err) {
             console.log(err.message);
         }
 

@@ -5,6 +5,7 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false
         },
         uniqueId: DataTypes.STRING,
+        reward: DataTypes.STRING,
         isCompleted: DataTypes.BOOLEAN
         })
 
