@@ -22,6 +22,7 @@ module.exports = class todoServices{
     static async getAllTodos(){
         try{
             return await todo.findAll({
+                where: { isCompleted: false },
                 order: [
                     ['createdAt', 'DESC'],
                 ],
@@ -79,10 +80,10 @@ module.exports = class todoServices{
 
     //========== FOR COMPLETED TODOS FEATURE ==================================================
 
-    static async completeTodo(id){
+    static async completeTodo(id,status, reward){
         try{
             console.log(id);
-                let response = await todo.update({isCompleted: true},{returning: true, where: {uniqueId: id} })
+                let response = await todo.update({isCompleted: status, reward},{returning: true, where: {uniqueId: id} })
 
                 return response
             
@@ -94,7 +95,8 @@ module.exports = class todoServices{
 
     static async getAllCompletedTodos(){
         try{
-            return await done.findAll({
+            return await todo.findAll({
+                where: { isCompleted: true },
                 order: [
                     ['createdAt', 'DESC'],
                 ],
@@ -109,9 +111,10 @@ module.exports = class todoServices{
         try{
             let todoId = id
 
-            let response = await done.findAll({
+            let response = await todo.findAll({
                 where: {
-                    uniqueId : todoId
+                    uniqueId : todoId,
+                    isCompleted: true
                 }
             })
 

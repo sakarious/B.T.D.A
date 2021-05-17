@@ -76,13 +76,10 @@ module.exports = class frontendController {
         
         if (req.body.status == '') {
             let status = true 
-            let response = await todoServices.completeTodo(id, description, status, reward)
+            let response = await todoServices.completeTodo(id, status, reward)
             if (response){
-                let response = await todoServices.deleteTodo(id)
-                if (response) {
-                    res.redirect('/completedtodos')
-                }
-                
+                    //res.redirect('/completedtodos')
+                    res.send('done')
             }
         } else{
             res.redirect('/all')
