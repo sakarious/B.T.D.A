@@ -67,6 +67,7 @@ module.exports = class todoServices{
         }
     }
 
+    // Update a todo
     static async updateTodo(id, fieldToUpdate){
         try{
             console.log(id);
@@ -153,7 +154,7 @@ module.exports = class todoServices{
 
     static async getAllTodos(){
         try{
-            let docs = await todoModel.find()
+            let docs = await todoModel.find({$and:[{"isCompleted": false}]})
             return docs
         } catch(err) {
             console.log(err.message);
@@ -188,5 +189,58 @@ module.exports = class todoServices{
         }
     }
 
+    // Update a todo
+    
+    static async updateTodo(id, fieldToUpdate){
+        try{
+            console.log(id);
+            console.log(fieldToUpdate);
+                let response = await todoModel.update({'uniqueId': id},{$set:{'description':fieldToUpdate }})
+                return response
+            
+        } catch(err) {
+            console.log(err.message);
+        }
+    }
+
+    //========== FOR COMPLETED TODOS FEATURE ==================================================
+
+    // complete todo
+
+    static async completeTodo(id,status, reward){
+        try{
+            console.log(id);
+                let response = await todoModel.update({'uniqueId': id},{$set:{'isCompleted': status, 'reward': reward }})
+                return response
+            
+        } catch(err) {
+            console.log(err.message);
+        }
+
+    }
+
+    static async getAllCompletedTodos(){
+        try{
+            let docs = await todoModel.find({$and:[{"isCompleted": true}]})
+            return docs
+        } catch(err) {
+            console.log(err.message);
+        }
+    }
+
+    static async getCompletedTodoById (id) {
+        try{
+            let todoId = id
+
+            let response = await todoModel.findOne({uniqueId: todoId}, {$and:[{"isCompleted": true}]})
+
+            return response
+        }
+        catch(err) {
+            console.log(err.message);
+        }
+    }
+
+    //find({$and:[{"by":"tutorials point"},{"title": "MongoDB Overview"}]}).
 
 }
