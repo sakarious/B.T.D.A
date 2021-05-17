@@ -35,6 +35,7 @@ module.exports = class todoServices{
         }
     }
 
+    // Get a todo
     static async getById (id) {
         try{
             let todoId = id
@@ -52,6 +53,7 @@ module.exports = class todoServices{
         }
     }
 
+    // Delete a todo
     static async deleteTodo (id) {
         try{
             let todoId = id
@@ -147,7 +149,7 @@ module.exports = class todoServices{
         }
     }
 
-        // Get all todos
+    // Get all todos
 
     static async getAllTodos(){
         try{
@@ -158,6 +160,33 @@ module.exports = class todoServices{
         }
     }
 
+    // Get a todo
 
-    
+    static async getById (id) {
+        try{
+            let todoId = id
+
+            let response = await todoModel.findOne({uniqueId: todoId})
+
+            return response
+        }
+        catch(err) {
+            console.log(err.message);
+        }
+    }
+
+    // Delete a todo
+
+    static async deleteTodo (id) {
+        try{
+            let todoId = id
+            let response = await todoModel.findOneAndDelete({uniqueId: todoId})
+            return response
+        }
+        catch(err) {
+            console.log(err.message);
+        }
+    }
+
+
 }
