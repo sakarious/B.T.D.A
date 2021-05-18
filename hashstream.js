@@ -78,15 +78,15 @@ https.get('https://coderbyte.com/api/challenges/json/age-counting', (response) =
         stream.end();
 
         //create hash object
-        let hash = crypto.createHash('sha1')
+        let sha1hash = crypto.createHash('sha1')
         //passing the file to be hashed
         let filename = __dirname + '/output.txt'
         let hash = fs.ReadStream(filename)
         hash.on('data', (chunk) => {
-            hash.update(chunk)
+            sha1hash.update(chunk)
         })
         hash.on('end', () => {
-            let hashHex = hash.digest('hex')
+            let hashHex = sha1hash.digest('hex')
             console.log(hashHex + " " + filename);
         })
     })
