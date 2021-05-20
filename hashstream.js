@@ -96,3 +96,72 @@ https.get('https://coderbyte.com/api/challenges/json/age-counting', (response) =
     })
     
 })
+
+//let s = "he is a good programmer, he won 865 competitions, but sometimes he dont. What do you think? All test-cases should pass. Done-done?"
+
+// let wordArray = s.split(' ')
+// //console.log(wordArray);
+
+// let counter = 0
+
+
+
+//console.log(counter);
+
+// function howMany(sentence) {
+//     let wordArray = sentence.split(' ')
+//     let counter = 0
+//     for (let index = 0; index < wordArray.length; index++) {
+//          if (!(n(wordArray[index]))){
+//              counter = counter + 1
+//          } 
+//      }
+//      return counter
+// }
+
+
+// console.log(howMany(s));
+
+
+// function pthFactor(n, p) {
+//     let factors = []
+//     if (p === 1) {
+//         return 1
+//     }
+//     let counter = 1
+//     while ( counter < n) {
+//         if ( ( n % counter ) === 0 ) {
+//             factors.push(counter)
+//         }
+//     counter++
+//     }
+//     if ( p < 0 || p > factors.length ) {
+//         return 0
+//     } else {
+//         return factors[p - 1];
+//     }
+// }
+// let answer = isWithinFactorRange(15,1)
+// console.log(answer);
+
+
+
+
+// function isWithinFactorRange (n, p) {
+//     let factors = []
+//     if (p === 1) {
+//         return 1
+//     }
+//     let counter = 1
+//     while ( counter < n) {
+//         if ( ( n % counter ) === 0 ) {
+//             factors.push(counter)
+//         }
+//     counter++
+//     }
+//     if ( p < 0 || p > factors.length ) {
+//         return 0
+//     } else {
+//         return factors[p - 1];
+//     }
+// }
