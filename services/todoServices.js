@@ -1,11 +1,23 @@
 const {v4: uuidv4} = require('uuid')
 //for todo, extract todos schema from models
-const { todo, done } = require('../models')
+const { todo } = require('../models')
+//Validation
+//const validation = require('../validations')
+// Custom Validation
+const validation = require('../validations/customValidation')
 
 module.exports = class todoServices{
     // Create new Todo
     static createTodo(description){
+        console.log(description);
         try{
+
+            const {error, isValid} = validation.todoCreation(description)
+
+            if(!isValid){
+                return error.description
+            }
+
             let newTodo = todo.create({
                 "uniqueId" : uuidv4(),
                 "description" : description,
@@ -38,6 +50,12 @@ module.exports = class todoServices{
     // Get a todo
     static async getById (id) {
         try{
+            const {error, isValid} = validation.getTodoByID(id)
+
+            if (!isValid){
+                return error.description
+            }
+
             let todoId = id
 
             let response = await todo.findAll({
@@ -56,6 +74,13 @@ module.exports = class todoServices{
     // Delete a todo
     static async deleteTodo (id) {
         try{
+
+            const {error, isValid} = validation.getTodoByID(id)
+
+            if (!isValid){
+                return error.description
+            }
+
             let todoId = id
             let response = await todo.destroy({ where: {
                 uniqueId: todoId
@@ -70,6 +95,13 @@ module.exports = class todoServices{
     // Update a todo
     static async updateTodo(id, fieldToUpdate){
         try{
+
+            const {error, isValid} = validation.updateTodoByID(id, fieldToUpdate)
+
+            if(!isValid){
+                return error.description
+            }
+
             console.log(id);
             console.log(fieldToUpdate);
                 let response = await todo.update({description: fieldToUpdate},{returning: true, where: {uniqueId: id} })

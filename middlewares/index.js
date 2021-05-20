@@ -5,11 +5,15 @@
 const path = require('path')
 const bodyParser = require('body-parser')
 const rateLimit = require('express-rate-limit')
+const helmet = require('helmet')
 require('dotenv').config()
 
 
 module.exports = (app) => {
     // view Engine
+
+    app.use(helmet())
+
     app.set('views', path.join(__dirname, "../views"))
     app.set('view engine', 'ejs')
 

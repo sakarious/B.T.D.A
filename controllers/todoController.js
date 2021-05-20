@@ -1,9 +1,17 @@
 //import services
 const todoServices = require('../services/todoServices')
+//custom Validation
+const validation = require('../validations/customValidation')
 
 module.exports = class TodoController {
     static async createTodo (req, res) {
         try{
+            const {error, isValid} = validation.validateDescription(req.body)
+
+            if (!isValid) {
+                return res.status(400).json({"code" : 400, "message" : error.description, "error": true})
+            }
+
             let response = await todoServices.createTodo(req.body.description)
 
             res.status(201).json({"code" : "SUCCESS", "success" : response, "error": null})
