@@ -13,11 +13,11 @@ module.exports = class customValidation {
             error.description = "Description cannot be a boolean"
         }
 
-        if (/[0-9]/.test(description)){
+        if (/^[0-9]+$/.test(description)){
             error.description = "Description cannot contain only number"
         }
 
-        return {error, isValid: Object.keys(error).length = 0}
+        return { error, isValid: Object.keys(error).length == 0}
     }
 
     static getTodoByID(id) {
@@ -39,7 +39,7 @@ module.exports = class customValidation {
             error.description = "Incorrect Unique ID format"
         }
 
-        return {error, isValid: Object.keys(error).length == 0 }
+        return { error, isValid: Object.keys(error).length == 0}
     }
 
     static validateDescription(object){

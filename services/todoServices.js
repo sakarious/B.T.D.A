@@ -8,15 +8,17 @@ const validation = require('../validations/customValidation')
 
 module.exports = class todoServices{
     // Create new Todo
-    static createTodo(description){
-        console.log(description);
+    static async createTodo(description){
+
         try{
 
-            const {error, isValid} = validation.todoCreation(description)
+            const {error, isValid} = await validation.todoCreation(description)
 
             if(!isValid){
                 return error.description
             }
+
+            console.log(description);
 
             let newTodo = todo.create({
                 "uniqueId" : uuidv4(),

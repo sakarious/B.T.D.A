@@ -94,7 +94,7 @@
 //     response.on('error', (err) => {
 //         console.log(err.message);
 //     })
-    
+
 // })
 
 // //let s = "he is a good programmer, he won 865 competitions, but sometimes he dont. What do you think? All test-cases should pass. Done-done?"
@@ -104,8 +104,6 @@
 
 // // let counter = 0
 
-
-
 // //console.log(counter);
 
 // // function howMany(sentence) {
@@ -114,14 +112,12 @@
 // //     for (let index = 0; index < wordArray.length; index++) {
 // //          if (!(n(wordArray[index]))){
 // //              counter = counter + 1
-// //          } 
+// //          }
 // //      }
 // //      return counter
 // // }
 
-
 // // console.log(howMany(s));
-
 
 // // function pthFactor(n, p) {
 // //     let factors = []
@@ -143,9 +139,6 @@
 // // }
 // // let answer = isWithinFactorRange(15,1)
 // // console.log(answer);
-
-
-
 
 // // function isWithinFactorRange (n, p) {
 // //     let factors = []
@@ -184,8 +177,11 @@
 //     if ('description' in object == false){
 //         error.description = "DESCRIPTION IS A REQUIRED FIELD IN REQUEST BODY"
 //     }
-    
+
 //     return { error, isValid: Object.keys(error).length == 0}
 // }
 
 // console.log(validateDescription({name: "Oluwasegun", description: "Present"}))
+
+let s = " ";
+if isEmpty(s)
