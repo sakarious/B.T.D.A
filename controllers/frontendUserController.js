@@ -14,6 +14,7 @@ module.exports = class frontendUserController {
 
   //Public static isNotLoggedIn (req, res, next) // For other endpoints
   static isNotLoggedIn(req, res, next) {
+    console.log(req.session);
     if (!req.session.isLoggedIn) {
       return res.redirect("/login");
     } else {
