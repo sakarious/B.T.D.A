@@ -13,8 +13,8 @@ module.exports = (app) => {
   app.use(
     session({
       secret: "Sakarious Da Genius",
-      resave: true,
-      saveUninitialized: true,
+      resave: false,
+      saveUninitialized: true
     })
   );
 

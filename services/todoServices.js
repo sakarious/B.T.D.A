@@ -49,10 +49,11 @@ module.exports = class todoServices {
       let user = foundUser[0].dataValues
       let userEmail = user.email;
       let hashPassword = user.password;
+      let username = user.username
       let password = await bcrypt.compare(passwd, hashPassword);
       console.log(password);
       if (email == userEmail && password) {
-        return true;
+        return {userEmail, hashPassword, username};
       } else {
         return "Fake Credentials";
       }

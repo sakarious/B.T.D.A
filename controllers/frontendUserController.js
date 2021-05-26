@@ -47,6 +47,8 @@ module.exports = class frontendUserController {
       res.json({ status: "Failed", message: "User Already Exist" });
     } else {
       //Registration Successful
+      console.log(response.email);
+      console.log(response.password);
       req.session.isLoggedIn = true;
       req.session.email = response.email;
       req.session.password = response.password;
@@ -71,9 +73,15 @@ module.exports = class frontendUserController {
     } else {
       //Login Successful
       req.session.isLoggedIn = true;
-      req.session.email = response.email;
-      req.session.password = response.password;
+      req.session.email = response.userEmail;
+      req.session.password = response.hashPassword;
+      req.session.username = response.username;
       res.redirect("/create");
     }
+  }
+
+  static logout(req, res) {
+    req.session = null;
+    res.redirect("/login");
   }
 };

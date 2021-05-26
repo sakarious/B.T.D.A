@@ -74,4 +74,9 @@ router.post("/loginUser", user.isLoggedIn, (req, res) => {
   user.processLogin(req, res);
 });
 
+
+router.get('/logout', (req, res) => {
+  user.logout(req, res)
+})
+
 module.exports = router;
