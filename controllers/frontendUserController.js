@@ -5,7 +5,7 @@ module.exports = class frontendUserController {
   // Public stactic isLoggedIn (req, res, next) // For login and register
   static isLoggedIn(req, res, next) {
     console.log(req.session);
-    if (req.session.isLoggedIn && req.session.email.length != 0) {
+    if (req.session.isLoggedIn) {
       return res.redirect("/");
     } else {
       next();
