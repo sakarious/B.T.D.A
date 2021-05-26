@@ -3,7 +3,11 @@ const todoServices = require("../services/todoServices");
 
 module.exports = class frontendController {
   static homepage(req, res) {
-    res.render("index");
+    if (req.session.isLoggedIn) {
+      res.render("index", { isLoggedIn: true, username: req.session.username });
+    } else {
+      res.render("index", { isLoggedIn: false });
+    }
   }
 
   static createTodo(req, res) {

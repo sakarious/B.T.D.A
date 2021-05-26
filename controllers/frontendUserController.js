@@ -24,7 +24,9 @@ module.exports = class frontendUserController {
 
   //Register
   static register(req, res) {
-    res.render("register", { title: "Register" });
+    if (!req.session.isLoggedIn) {
+      res.render("register", { title: "Register", isLoggedIn: false });
+    }
   }
 
   //Process Register i.e Add user to db
@@ -57,7 +59,9 @@ module.exports = class frontendUserController {
   }
 
   static login(req, res) {
-    res.render("login", { title: "Login" });
+    if (!req.session.isLoggedIn) {
+      res.render("login", { title: "Login", isLoggedIn: false });
+    }
   }
 
   static async processLogin(req, res) {
@@ -81,10 +85,10 @@ module.exports = class frontendUserController {
   }
 
   static logout(req, res) {
-    req.session.destroy(function(err) {
+    req.session.destroy(function (err) {
       if (!err) {
         res.redirect("/login");
       }
-    })
+    });
   }
 };

@@ -14,7 +14,12 @@ module.exports = (app) => {
     session({
       secret: "Sakarious Da Genius",
       resave: false,
-      saveUninitialized: true
+      saveUninitialized: true,
+      cookie: {
+        path: '/',
+        httpOnly: true,
+        maxAge: 24 * 60 * 60 * 1000,
+      }
     })
   );
 

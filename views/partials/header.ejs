@@ -34,6 +34,7 @@
 
         <nav id="navbar" class="navbar">
           <ul>
+            <% if ( isLoggedIn ) { %>
             <li><a class="nav-link scrollto" href="/create">Create Todo</a></li>
             <li><a class="nav-link scrollto" href="/all">See All Todos</a></li>
             <li>
@@ -41,6 +42,13 @@
                 >All Completed Todos</a
               >
             </li>
+            <% } else { %>
+            <li><a class="getstarted scrollto" href="/">Home</a></li>
+            <li><a class="getstarted scrollto" href="/login">Login</a></li>
+            <li>
+              <a class="getstarted scrollto" href="/register">Register</a>
+            </li>
+            <% } %>
           </ul>
           <i class="bi bi-list mobile-nav-toggle"></i>
         </nav>
