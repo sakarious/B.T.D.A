@@ -81,7 +81,10 @@ module.exports = class frontendUserController {
   }
 
   static logout(req, res) {
-    req.session = null;
-    res.redirect("/login");
+    req.session.destroy(function(err) {
+      if (!err) {
+        res.redirect("/login");
+      }
+    })
   }
 };
