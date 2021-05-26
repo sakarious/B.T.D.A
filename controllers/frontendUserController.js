@@ -70,7 +70,10 @@ module.exports = class frontendUserController {
       res.json({ status: "Incorrect username or password" });
     } else {
       //Login Successful
-      res.json({ status: "Login Successful" });
+      req.session.isLoggedIn = true;
+      req.session.email = response.email;
+      req.session.password = response.password;
+      res.redirect("/create");
     }
   }
 };
