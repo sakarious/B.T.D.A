@@ -4,18 +4,21 @@ const todoServices = require("../services/todoServices");
 module.exports = class frontendUserController {
   // Public stactic isLoggedIn (req, res, next) // For login and register
   static isLoggedIn(req, res, next) {
+    console.log(req.session);
     if (req.session.isLoggedIn && req.session.email.length != 0) {
-      return res.render("create", { title: "Create Todo" });
+      return res.redirect("/");
+    } else {
+      next();
     }
-    next();
   }
 
   //Public static isNotLoggedIn (req, res, next) // For other endpoints
   static isNotLoggedIn(req, res, next) {
     if (!req.session.isLoggedIn) {
-      return res.render("login", { title: "Login" });
+      return res.redirect("/login");
+    } else {
+      next();
     }
-    next();
   }
 
   //Register
@@ -39,6 +42,34 @@ module.exports = class frontendUserController {
       password
     );
 
-    res.json({ response });
+    if (response == false) {
+      res.json({ status: "Failed", message: "User Already Exist" });
+    } else {
+      //Registration Successful
+      req.session.isLoggedIn = true;
+      req.session.email = response.email;
+      req.session.password = response.password;
+      res.redirect("/create");
+    }
+  }
+
+  static login(req, res) {
+    res.render("login", { title: "Login" });
+  }
+
+  static async processLogin(req, res) {
+    let email = req.body.email;
+    let password = req.body.password;
+
+    let response = await todoServices.loginUser(email, password);
+
+    if (response == false) {
+      res.json({ status: "Failed", message: "User not found" });
+    } else if (response == "Fake Credentials") {
+      res.json({ status: "Incorrect username or password" });
+    } else {
+      //Login Successful
+      res.json({ status: "Login Successful" });
+    }
   }
 };

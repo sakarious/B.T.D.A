@@ -3,12 +3,13 @@
 // TODO add a rate limiter to this application
 const path = require("path");
 const bodyParser = require("body-parser");
+const session = require("express-session");
 const rateLimit = require("express-rate-limit");
 const helmet = require("helmet");
-const session = require("express-session");
 require("dotenv").config();
 
 module.exports = (app) => {
+
   app.use(
     session({
       secret: "Sakarious Da Genius",

@@ -15,35 +15,47 @@ module.exports = class todoServices {
   static async createUser(firstname, lastname, username, email, passwd) {
     let existingUser = await users.findAll({
       where: {
-        email
-      }
-    })
-    if (existingUser){
-      return false //Email taken. Please select another email 
+        email,
+      },
+    });
+    if (existingUser.length == 0) {
+      let password = await bcrypt.hash(passwd, saltRound);
+      let newUser = users.create({
+        firstname,
+        lastname,
+        username,
+        email,
+        password,
+        isAdmin: false,
+      });
+      return newUser;
+    } else {
+      return false; //Email taken. Please select another email
     }
-
-    let password = await bcrypt.hash(passwd, saltRound);
-    let newUser = users.create({
-      firstname,
-      lastname,
-      username,
-      email,
-      password,
-      isAdmin: false
-    })
-    return newUser
-    //let unhashPassword = await bcrypt.compare(passwd, password)
-    //return { password, unhashPassword }
   }
 
   // Login -- Check is email exists in db, if it doesnt exist render register page, else check if password matches. if it doesnt, return false, if it does, add session
-  static async loginUser(email, password) {
+  static async loginUser(email, passwd) {
     let foundUser = await users.findAll({
       where: { email },
-    })
+    });
 
-    if (!foundUser){
-      return false // User not found in database
+    if (foundUser.length == 0) {
+      return false; //User does not exist
+    }
+
+    if (foundUser.length != 0) {
+      //compare credentials
+      let user = foundUser[0].dataValues
+      let userEmail = user.email;
+      let hashPassword = user.password;
+      let password = await bcrypt.compare(passwd, hashPassword);
+      console.log(password);
+      if (email == userEmail && password) {
+        return true;
+      } else {
+        return "Fake Credentials";
+      }
     }
   }
 

@@ -8,62 +8,70 @@ router.get("/", (req, res) => {
   frontendController.homepage(req, res);
 });
 
-router.get("/create", (req, res) => {
+router.get("/create", user.isNotLoggedIn, (req, res) => {
   frontendController.createTodo(req, res);
 });
 
 router.post("/process", (req, res) => {
-  frontendController.processTodo(req, res);
+  user.isNotLoggedIn, frontendController.processTodo(req, res);
 });
 
 router.get("/all", (req, res) => {
-  frontendController.getAll(req, res);
+  user.isNotLoggedIn, frontendController.getAll(req, res);
 });
 
 router.get("/view/:uniqueId", (req, res) => {
-  frontendController.getOne(req, res);
+  user.isNotLoggedIn, frontendController.getOne(req, res);
 });
 
 router.get("/update/:uniqueId", (req, res) => {
-  frontendController.updateTodo(req, res);
+  user.isNotLoggedIn, frontendController.updateTodo(req, res);
 });
 
 router.post("/updateTodo/:uniqueId", (req, res) => {
-  frontendController.processUpdateTodo(req, res);
+  user.isNotLoggedIn, frontendController.processUpdateTodo(req, res);
 });
 
 router.get("/delete/:uniqueId", (req, res) => {
-  frontendController.deleteOne(req, res);
+  user.isNotLoggedIn, frontendController.deleteOne(req, res);
 });
 
 router.post("/delete/:uniqueId", (req, res) => {
-  frontendController.processDelete(req, res);
+  user.isNotLoggedIn, frontendController.processDelete(req, res);
 });
 
 router.get("/done/:uniqueId", (req, res) => {
-  frontendController.complete(req, res);
+  user.isNotLoggedIn, frontendController.complete(req, res);
 });
 
 router.post("/done/:uniqueId", (req, res) => {
-  frontendController.processComplete(req, res);
+  user.isNotLoggedIn, frontendController.processComplete(req, res);
 });
 
 router.get("/completedtodos", (req, res) => {
-  frontendController.getAllCompleted(req, res);
+  user.isNotLoggedIn, frontendController.getAllCompleted(req, res);
 });
 
 router.get("/viewcompleted/:uniqueId", (req, res) => {
-  frontendController.getOneCompleted(req, res);
+  user.isNotLoggedIn, frontendController.getOneCompleted(req, res);
 });
 
 //USERS AUTH
 
 router.get("/register", (req, res) => {
-  user.register(req, res);
+  user.isLoggedIn, user.register(req, res);
 });
 
 router.post("/registerUser", (req, res) => {
-  user.processRegister(req, res);
+  user.isLoggedIn, user.processRegister(req, res);
+});
+
+router.get("/login", (req, res) => {
+  user.isLoggedIn, user.login(req, res);
+});
+
+router.post("/loginUser", (req, res) => {
+  user.isLoggedIn, user.processLogin(req, res);
 });
 
 module.exports = router;
