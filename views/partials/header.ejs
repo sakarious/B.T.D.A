@@ -35,6 +35,7 @@
         <nav id="navbar" class="navbar">
           <ul>
             <% if ( isLoggedIn ) { %>
+            <li class="getstarted scrollto"> Welcome <%= username %> </li>
             <li><a class="nav-link scrollto" href="/create">Create Todo</a></li>
             <li><a class="nav-link scrollto" href="/all">See All Todos</a></li>
             <li>

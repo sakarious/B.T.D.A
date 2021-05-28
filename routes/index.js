@@ -1,25 +1,23 @@
-const todoRoute = require('./todoRoutes');
-const frontendRoute = require('./frontendRoute')
+const todoRoute = require("./todoRoutes");
+const frontendRoute = require("./frontendRoute");
+const frontendAuthRoute = require("./frontendAuthRoute");
+const auth = require("../controllers/frontendAuthController");
 
 module.exports = (app) => {
+  app.use("/", frontendRoute);
+  //app.use("/auth", auth.isLoggedIn, frontendAuthRoute);
 
-  app.use('/', frontendRoute);
+  app.use("/v1/todos", todoRoute);
 
-  app.use('/v1/todos', todoRoute);
-
-  app.use('/health', (req, res) => {
+  app.use("/health", (req, res) => {
     res.send("I'm in a good working condition");
   });
-
-}
-
-
+};
 
 // Route
 // middleware use function with route pattern and handler
 // http verb of the express function
 // middleware use function with route pattern and exported router module
-
 
 // User Module
 // Post Module

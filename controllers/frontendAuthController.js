@@ -1,8 +1,7 @@
 //import services
 const todoServices = require("../services/todoServices");
 
-module.exports = class frontendUserController {
-  // Public stactic isLoggedIn (req, res, next) // For login and register
+module.exports = class frontendAuthController {
   static isLoggedIn(req, res, next) {
     console.log(req.session);
     if (req.session.isLoggedIn) {
@@ -12,7 +11,6 @@ module.exports = class frontendUserController {
     }
   }
 
-  //Public static isNotLoggedIn (req, res, next) // For other endpoints
   static isNotLoggedIn(req, res, next) {
     console.log(req.session);
     if (!req.session.isLoggedIn) {

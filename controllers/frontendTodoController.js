@@ -11,7 +11,11 @@ module.exports = class frontendController {
   }
 
   static createTodo(req, res) {
-    res.render("create", { title: "Create Todo" });
+    res.render("create", {
+      title: "Create Todo",
+      isLoggedIn: true,
+      username: req.session.username,
+    });
   }
 
   static async processTodo(req, res) {

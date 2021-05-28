@@ -1,7 +1,7 @@
 const express = require('express');
 const routes = require('./routes');
 const middleware = require('./middlewares')
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8000;
 const db = require('./models')
 const path = require('path')
 
